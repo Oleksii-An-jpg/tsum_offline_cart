@@ -1,0 +1,15 @@
+.indicator {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    margin-top: -25px;
+    margin-left: -10px;
+}
+
+.online {
+    color: rgb(var(--venia-global-color-green-500));
+}
+
+.offline {
+    color: rgb(var(--venia-global-color-red-400));
+}
