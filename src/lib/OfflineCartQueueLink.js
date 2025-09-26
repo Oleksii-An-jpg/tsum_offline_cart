@@ -22,9 +22,10 @@ class OfflineQueueLink extends ApolloLink {
 
     request(operation, forward) {
         const isOffline = !this.store.getState().app.isOnline;
+        const query = operation.getContext().cache.readQuery({ query: GET_ITEM_COUNT_QUERY });
 
-        const { cart } = operation.getContext().cache.readQuery({ query: GET_ITEM_COUNT_QUERY });
-        if (isOffline && operation.operationName === 'AddProductToCart') {
+        if (query && isOffline && operation.operationName === 'AddProductToCart') {
+            const { cart } = query;
             return new Observable(observer => {
                 const optimisticResult = this.generateOptimisticResponse(operation, cart);
 

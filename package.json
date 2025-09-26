@@ -8,18 +8,18 @@
   "scripts": {
     "buildpack": "buildpack",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && npm run build:prod",
-    "build:analyze": "npm run clean && mkdir dist && webpack -p --profile --no-progress --env.mode production --json > dist/build-stats.json && webpack-bundle-analyzer dist/build-stats.json",
-    "build:dev": "npm run clean && webpack --no-progress --env.mode development",
-    "build:prod": "npm run clean && webpack --no-progress --env.mode production",
-    "build:report": "buildpack generate-build-report",
+    "build:analyze": "NODE_OPTIONS=--openssl-legacy-provider npm run clean && mkdir dist && webpack -p --profile --no-progress --env.mode production --json > dist/build-stats.json && webpack-bundle-analyzer dist/build-stats.json",
+    "build:dev": "NODE_OPTIONS=--openssl-legacy-provider npm run clean && webpack --no-progress --env.mode development",
+    "build:prod": "NODE_OPTIONS=--openssl-legacy-provider npm run clean && webpack --no-progress --env.mode production",
+    "build:report": "NODE_OPTIONS=--openssl-legacy-provider buildpack generate-build-report",
     "clean": "rimraf dist",
     "lint": "eslint --ignore-path .gitignore 'src/**/{*.js,package.json}'",
     "prettier": "prettier --loglevel warn --ignore-path .gitignore 'src/**/*.@(css|graphql|js)' '*.js'",
     "prettier:check": "npm run -s prettier -- --check",
     "prettier:fix": "npm run -s prettier -- --write",
-    "start": "buildpack serve .",
-    "start:debug": "node --inspect-brk ./node_modules/.bin/webpack-dev-server --progress --color --env.mode development",
-    "watch": "webpack-dev-server --progress --color --env.mode development",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider buildpack serve .",
+    "start:debug": "NODE_OPTIONS=--openssl-legacy-provider node --inspect-brk ./node_modules/.bin/webpack-dev-server --progress --color --env.mode development",
+    "watch": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --progress --color --env.mode development",
     "storybook": "start-storybook -p 9001 -c src/.storybook",
     "storybook:build": "build-storybook -c src/.storybook -o storybook-dist"
   },
@@ -128,12 +128,9 @@
     "workbox-webpack-plugin": "~6.2.4",
     "@magento/venia-sample-backends": "~0.0.1"
   },
-  "optionalDependencies": {
-    "sharp": "~0.29.3"
-  },
   "engines": {
-    "node": ">=18.x",
-    "yarn": ">=1.12.0"
+    "node": "18.5.0",
+    "yarn": "8.12.1"
   },
   "pwa-studio": {
     "targets": {

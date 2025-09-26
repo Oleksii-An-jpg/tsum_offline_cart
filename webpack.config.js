@@ -83,7 +83,8 @@ module.exports = async env => {
         config.output = {
             ...config.output,
             publicPath: `/${storeViewCode}/`,
-            path: path.resolve(__dirname, 'dist', storeViewCode)
+            path: path.resolve(__dirname, 'dist', storeViewCode),
+            hashFunction: 'xxhash64'
         };
     }
 
